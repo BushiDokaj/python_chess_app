@@ -1,0 +1,1 @@
+FLASK_APP=chess_app.py
