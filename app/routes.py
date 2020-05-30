@@ -6,5 +6,6 @@ from logic.chess_board import Board
 @app.route('/')
 @app.route('/chess')
 def chess():
-    # TODO: determine a method of passing the board to a template display
-    return render_template('chess.html')
+    b = Board()
+    img_dict = b.board_to_img()
+    return render_template('chess.html', img_dict=img_dict)

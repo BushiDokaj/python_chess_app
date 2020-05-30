@@ -14,6 +14,7 @@ class Pawn(Piece):
         self.can_en_passent = [None, None]
         self.has_moved = False
         self.value = 100
+        self.img = self.colour+"_pawn.png"
 
     def set_square(self, square):
         self.square = square
@@ -53,6 +54,7 @@ class King(Piece):
         self.has_moved = False
         self.in_check = False
         self.value = 50000
+        self.img = self.colour + "_king.png"
 
     def valid_moves(self, board):
         possible = []
@@ -82,6 +84,7 @@ class Rook(Piece):
         super().__init__(square, colour, rep)
         self.has_moved = False
         self.value = 550
+        self.img = self.colour + "_rook.png"
 
     def valid_moves(self, board):
         valid = []
@@ -140,6 +143,7 @@ class Knight(Piece):
     def __init__(self, square, colour, rep):
         super().__init__(square, colour, rep)
         self.value = 325
+        self.img = self.colour + "_knight.png"
 
     def valid_moves(self, board):
         possible = []
@@ -168,6 +172,7 @@ class Bishop(Piece):
     def __init__(self, square, colour, rep):
         super().__init__(square, colour, rep)
         self.value = 325
+        self.img = self.colour + "_bish.png"
 
     def valid_moves(self, board):
         valid = []
@@ -233,6 +238,7 @@ class Queen(Piece):
     def __init__(self, square, colour, rep):
         super().__init__(square, colour, rep)
         self.value = 1000
+        self.img = self.colour + "_queen.png"
 
     def valid_moves(self, board):
         valid = []

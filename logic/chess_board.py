@@ -250,3 +250,10 @@ class Board:
                     if king_two is None or king_two.colour != piece.colour:
                         return False
             return True
+
+    def board_to_img(self):
+        imgs = {}
+        for key, value in self.board.items():
+            if value is not None:
+                imgs[key] = value.img
+        return imgs
