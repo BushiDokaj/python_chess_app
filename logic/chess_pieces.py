@@ -302,10 +302,11 @@ class Queen(Piece):
                     valid.append(new)
                     break
                 else:
-                    new = (x, y)
                     break
             else:
                 valid.append(new)
+
+        new = (x, y)
 
         while new[0] - 1 >= 1 and (1 <= l_one(new[0] - 1) <= 8):
             new = (new[0] - 1, l_one(new[0] - 1))
@@ -314,10 +315,11 @@ class Queen(Piece):
                     valid.append(new)
                     break
                 else:
-                    new = (x, y)
                     break
             else:
                 valid.append(new)
+
+        new = (x, y)
 
         while new[0] + 1 <= 8 and (1 <= l_two(new[0] + 1) <= 8):
             new = (new[0] + 1, l_two(new[0] + 1))
@@ -326,10 +328,11 @@ class Queen(Piece):
                     valid.append(new)
                     break
                 else:
-                    new = (x, y)
                     break
             else:
                 valid.append(new)
+
+        new = (x, y)
 
         while new[0] - 1 >= 1 and (1 <= l_two(new[0] - 1) <= 8):
             new = (new[0] - 1, l_two(new[0] - 1))

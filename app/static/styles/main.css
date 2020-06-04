@@ -1,0 +1,90 @@
+body {
+    background-color: #272727;
+    color: WhiteSmoke;
+    position: relative;
+}
+
+.car_image {
+    width: 850px;
+    height: 400px;
+}
+
+#home {
+    padding-top: 70px;
+    padding-bottom: 30px;
+    padding-right:16px;
+    padding-left:16px;
+}
+
+#play_chess {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right:16px;
+    padding-left:16px;
+}
+
+#about {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right:16px;
+    padding-left:16px;
+}
+
+#title {
+    padding-bottom:16px;
+}
+
+#intro {
+    padding-top:16px;
+}
+
+#end {
+    padding-top:16px;
+    padding-left:200px;
+    padding-right:200px;
+}
+
+#play_head {
+    padding-bottom:16px;
+}
+
+#me {
+    width: 200px;
+    height: 260px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.link {
+    color: Gold;
+}
+
+.y_nums {
+    width: 20px;
+    height: 45px;
+    text-align: center;
+}
+
+.light_square {
+    background-color: WhiteSmoke;
+    width: 45px;
+    height: 45px;
+}
+
+.dark_square {
+    background-color: Sienna;
+    width: 45px;
+    height: 45px;
+}
+
+.piece {
+    width: 45px;
+    height 45px;
+}
+
+.x_letter {
+    width: 48px;
+    height: 20px;
+    text-align: center;
+}
+

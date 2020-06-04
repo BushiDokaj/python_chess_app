@@ -11,8 +11,7 @@ def chess():
 
     if request.method == 'POST' and req is not None and b.board[eval(req['sq_one'])] is not None:
         b.move(eval(req['sq_one']), eval(req['sq_two']))
-        img_dict = b.board_to_img()
-        return render_template('chess.html', img_dict=img_dict)
-    else:
-        img_dict = b.board_to_img()
-        return render_template('chess.html', img_dict=img_dict)
+        print(b)
+
+    img_dict = b.board_to_img()
+    return render_template('chess.html', img_dict=img_dict)

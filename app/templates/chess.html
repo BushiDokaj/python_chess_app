@@ -9,9 +9,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script type=text/javascript src="{{ url_for('static', filename='js/drag.js') }}"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
     <title>Python Chess App</title>
 </head>
-<body data-spy="scroll" data-target=".navbar" data-offset="50" style="background-color: #272727; color: WhiteSmoke; position: relative;">
+<body data-spy="scroll" data-target=".navbar" data-offset="100">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
@@ -19,12 +20,11 @@
             <li class="nav-item"><a class="nav-link" href="#about">About Me</a> </li>
         </ul>
     </nav>
-    <div id="home" class="container-fluid p-3 my-3">
-        <h1 class="display-3 text-center">Python Chess App</h1>
-        <p></p>
+    <div id="home" class="container-fluid">
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
+                <h1 id="title" class="display-3 text-center">Python Chess App</h1>
                 <div id="demo" class="carousel slide" data-ride="carousel">
                     <ul class="carousel-indicators">
                         <li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -34,104 +34,123 @@
                     </ul>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="/static/images/chess_art.jpg" class="mx-auto d-block img-fluid" style="width: 750px; height: 400px;">
+                            <img src="/static/images/chess_art.jpg" class="car_image mx-auto d-block img-fluid">
                         </div>
                         <div class="carousel-item">
-                            <img src="/static/images/bobby_fischer.jpeg" class="mx-auto d-block img-fluid" style="width: 750px; height: 400px;">
+                            <img src="/static/images/bobby_fischer.jpeg" class="car_image mx-auto d-block img-fluid">
                         </div>
                         <div class="carousel-item">
-                            <img src="/static/images/garry_kasparov.jpg" class="mx-auto d-block img-fluid" style="width: 750px; height: 400px;">
+                            <img src="/static/images/garry_kasparov.jpg" class="car_image mx-auto d-block img-fluid">
                         </div>
                         <div class="carousel-item">
-                            <img src="/static/images/magnus_carlsen.jpeg" class="mx-auto d-block img-fluid" style="width: 750px; height: 400px;">
+                            <img src="/static/images/magnus_carlsen.jpeg" class="car_image mx-auto d-block img-fluid">
                         </div>
                     </div>
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <a class="carousel-control-prev" href="#demo" data-slide="prev" style="background-color: Black; width: 65px;">
                         <span class="carousel-control-prev-icon"></span>
                     </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <a class="carousel-control-next" href="#demo" data-slide="next" style="background-color: Black; width: 65px;">
                         <span class="carousel-control-next-icon"></span>
                     </a>
                 </div>
+                <p id="intro" class="text-center">Chess is a fun game that I love to play. As a summer project
+            I decided to try and build a chess app using python and decided to host it on a website
+            using Flask. Currently the app only supports two player games. In the future I will try to
+            create an algorithm so that you can play against the AI.
+            If you would like to see the code, please visit my github: <a class="link" href="https://github.com/BushiDokaj" target="_blank">BushiDokaj</a>
+                </p>
             </div>
             <div class="col-2"></div>
         </div>
-        <p></p>
-        <h4 class="text-center">The chess app below was built using Python! If you would like to see the code, visit my github: <a href="https://github.com/BushiDokaj" target="_blank">BushiDokaj</a></h4>
     </div>
-    <div id="play_chess" class="container-fluid p-3 my-3">
-        <div class="col">
-            <table class="table-borderless">
-                <tr>
-                    <td>
+    <div id="play_chess" class="container-fluid">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <h4 id="play_head" class="text-center">Make a move to start the game!</h4>
+                <table class="table-borderless">
+                    <tr>
+                        <td>
+                            <table class="table-borderless">
+                                {% for y in range(8) %}
+                                    <tr>
+                                        <td class="y_nums">{{ 8-y }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                        <td>
+                            <table class="table-bordered">
+                                {% for y in range(8) %}
+                                    <tr>
+                                        {% for x in range(8) %}
+                                            {% if x in [1,3,5,7] %}
+                                                {% if y in [0,2,4,6,8] %}
+                                                    <td id="div{{ x }}{{ y }}" class="dark_square" data-square="({{ x+1 }},{{ 8-y }})" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                                        {% if (x+1,8-y) in img_dict.keys() %}
+                                                            <img id="drag{{ x }}{{ y }}" class="piece" data-square="({{ x+1 }},{{ 8-y }})" src="/static/images/{{ img_dict[(x+1,8-y)] }}" draggable="true" ondragstart="drag(event)">
+                                                        {% endif %}
+                                                    </td>
+                                                {% else %}
+                                                    <td id="div{{ x }}{{ y }}" class="light_square" data-square="({{ x+1 }},{{ 8-y }})" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                                        {% if (x+1,8-y) in img_dict.keys() %}
+                                                            <img id="drag{{ x }}{{ y }}" class="piece" data-square="({{ x+1 }},{{ 8-y }})" src="/static/images/{{ img_dict[(x+1,8-y)] }}" draggable="true" ondragstart="drag(event)">
+                                                        {% endif %}
+                                                    </td>
+                                                {% endif %}
+                                            {% else %}
+                                                {% if y in [1,3,5,7] %}
+                                                    <td id="div{{ x }}{{ y }}" class="dark_square" data-square="({{ x+1 }},{{ 8-y }})" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                                        {% if (x+1,8-y) in img_dict.keys() %}
+                                                            <img id="drag{{ x }}{{ y }}" class="piece" data-square="({{ x+1 }},{{ 8-y }})" src="/static/images/{{ img_dict[(x+1,8-y)] }}" draggable="true" ondragstart="drag(event)">
+                                                        {% endif %}
+                                                    </td>
+                                                {% else %}
+                                                    <td id="div{{ x }}{{ y }}" class="light_square" data-square="({{ x+1 }},{{ 8-y }})" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                                        {% if (x+1,8-y) in img_dict.keys() %}
+                                                            <img id="drag{{ x }}{{ y }}" class="piece" data-square="({{ x+1 }},{{ 8-y }})" src="/static/images/{{ img_dict[(x+1,8-y)] }}" draggable="true" ondragstart="drag(event)">
+                                                        {% endif %}
+                                                    </td>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
                         <table class="table-borderless">
-                            {% for y in range(8) %}
-                                <tr>
-                                    <td style="width: 20px; height: 60px;">{{ 8-y }}</td>
-                                </tr>
-                            {% endfor %}
+                            <tr>
+                                <td style="width: 23px; height: 20px;"></td>
+                                <td class="x_letter">a</td>
+                                <td class="x_letter">b</td>
+                                <td class="x_letter">c</td>
+                                <td class="x_letter">d</td>
+                                <td class="x_letter">e</td>
+                                <td class="x_letter">f</td>
+                                <td class="x_letter">g</td>
+                                <td class="x_letter">h</td>
+                            </tr>
                         </table>
-                    </td>
-                    <td>
-                        <table class="table-bordered">
-                            {% for y in range(8) %}
-                                <tr>
-                                    {% for x in range(8) %}
-                                        {% if x in [1,3,5,7] %}
-                                            {% if y in [0,2,4,6,8] %}
-                                                <td id="div{{ x }}{{ y }}" data-square="({{ x+1 }},{{ 8-y }})" style="background-color: Sienna; width: 61px; height: 61px" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                                    {% if (x+1,8-y) in img_dict.keys() %}
-                                                        <img id="drag{{ x }}{{ y }}" data-square="({{ x+1 }},{{ 8-y }})" src="/static/images/{{ img_dict[(x+1,8-y)] }}" draggable="true" ondragstart="drag(event)">
-                                                    {% endif %}
-                                                </td>
-                                            {% else %}
-                                                <td id="div{{ x }}{{ y }}" data-square="({{ x+1 }},{{ 8-y }})" style="background-color: Ivory; width: 61px; height: 61px" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                                    {% if (x+1,8-y) in img_dict.keys() %}
-                                                        <img id="drag{{ x }}{{ y }}" data-square="({{ x+1 }},{{ 8-y }})" src="/static/images/{{ img_dict[(x+1,8-y)] }}" draggable="true" ondragstart="drag(event)">
-                                                    {% endif %}
-                                                </td>
-                                            {% endif %}
-                                        {% else %}
-                                            {% if y in [1,3,5,7] %}
-                                                <td id="div{{ x }}{{ y }}" data-square="({{ x+1 }},{{ 8-y }})" style="background-color: Sienna; width: 61px; height: 61px" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                                    {% if (x+1,8-y) in img_dict.keys() %}
-                                                        <img id="drag{{ x }}{{ y }}"  data-square="({{ x+1 }},{{ 8-y }})" src="/static/images/{{ img_dict[(x+1,8-y)] }}" draggable="true" ondragstart="drag(event)">
-                                                    {% endif %}
-                                                </td>
-                                            {% else %}
-                                                <td id="div{{ x }}{{ y }}" data-square="({{ x+1 }},{{ 8-y }})" style="background-color: Ivory; width: 61px; height: 61px" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                                    {% if (x+1,8-y) in img_dict.keys() %}
-                                                        <img id="drag{{ x }}{{ y }}" data-square="({{ x+1 }},{{ 8-y }})" src="/static/images/{{ img_dict[(x+1,8-y)] }}" draggable="true" ondragstart="drag(event)">
-                                                    {% endif %}
-                                                </td>
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endfor %}
-                                </tr>
-                            {% endfor %}
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <table class="table-borderless">
-                        <tr>
-                            <td style="width: 23px; height: 20px;"></td>
-                            <td style="text-align: center; width: 62px; height: 20px;">a</td>
-                            <td style="text-align: center; width: 62px; height: 20px;">b</td>
-                            <td style="text-align: center; width: 62px; height: 20px;">c</td>
-                            <td style="text-align: center; width: 62px; height: 20px;">d</td>
-                            <td style="text-align: center; width: 62px; height: 20px;">e</td>
-                            <td style="text-align: center; width: 62px; height: 20px;">f</td>
-                            <td style="text-align: center; width: 62px; height: 20px;">g</td>
-                            <td style="text-align: center; width: 62px; height: 20px;">h</td>
-                        </tr>
-                    </table>
-                </tr>
-            </table>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-3"></div>
         </div>
     </div>
     <div id="about">
-        <h5>About Me</h5>
+        <h1 class="display-4 text-center">About Me</h1>
+        <img id="me" src="/static/images/me.jpg" class="mx-auto d-block img-fluid">
+        <p id="end" class="text-center"> My name is Kujtim Dokaj. I am a student in the Industrial Engineering program at the
+        University of Toronto. I am looking to pursue a career at the intersection of business
+        and technology as a consultant, developer, or data scientist. If you would like to reach
+        out and contact or would like to know more about my experience feel free to connect with
+        me on <a class="link" href="https://www.linkedin.com/in/kujtim-dokaj/" target="_blank">LinkedIn</a> or
+        view my <a class="link" href="https://github.com/BushiDokaj" target="_blank">Github</a>. Thank you for
+        visiting my site.
+        </p>
+        </div>
     </div>
 </body>
 </html>
