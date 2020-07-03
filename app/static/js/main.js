@@ -73,6 +73,11 @@ if (sq_one && sq_two!=sq_one){
                     }
                 }
                 sq_one = null
+                if (response.outcome) {
+                    setTimeout(function () {
+                    $("#"+response.outcome+"Modal").modal('show');
+                    }, 500);
+                }
             } else {
                 sq_one = null
                 alert(response.error)
@@ -99,6 +104,7 @@ $.ajax({
                 piece.id = "piece("+sq_two.slice(1,4)+")";
                 piece.src = src
                 document.getElementById("square"+sq_two).append(piece)
+                $('.modal').modal('hide')
             } else {
                 alert(response)
             }

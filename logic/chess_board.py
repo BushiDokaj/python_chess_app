@@ -272,7 +272,7 @@ class Board:
     def game_over(self):
         king = self.king_in_check()
         if self.half_moves != 0 and self.threefold_tracker.count(self.threefold_tracker[-1]) == 3:
-            self.outcome = 0
+            self.outcome = 'draw'
             return True
         if king is None:
             return False
@@ -284,7 +284,7 @@ class Board:
             for piece in same_colour:
                 if len(piece.moves) > 0:
                     return False
-            self.outcome = 1 if king.colour == 'white' else -1
+            self.outcome = 'black' if king.colour == 'white' else 'white'
             return True
 
     def board_html(self):

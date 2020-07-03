@@ -49,20 +49,19 @@ def promote():
 
     try:
         b.move(sq_one, sq_two, promotion)
-        if b.game_over():
-            return redirect(url_for('/chess', game_over=b.outcome))
     except Exception as e:
         error = str(e)
 
     return make_response(jsonify(error))
 
 
-@app.route('/execute', methods=['POST'])
+@app.route('/execute', methods=['GET', 'POST'])
 def execute():
     if request.method == "POST":
 
         castle = None
         error = False
+        outcome = False
         empty = None
 
         sq_one = eval(request.get_json()['sq_one'])
@@ -83,11 +82,10 @@ def execute():
         try:
             b.move(sq_one, sq_two)
             if b.game_over():
-                return redirect(url_for('/chess', game_over=b.outcome))
+                outcome = b.outcome
             empty = b.js_remove()
         except Exception as e:
             error = str(e)
-
-        response = {'error': error, 'castle': castle, 'empty': empty}
+        response = {'error': error, 'castle': castle, 'empty': empty, 'outcome': outcome}
 
     return make_response(jsonify(response))

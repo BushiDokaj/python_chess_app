@@ -1,0 +1,91 @@
+<!-- draw modal -->
+<div class="modal" id="drawModal">
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <!-- Modal Header -->
+    <div class="modal-header">
+        <h4 class="modal-title" style="color: Black;">Draw!</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body text-center">
+        <h1 class="display-4" style="color: Black;">Neither Player Won this Game</h1>
+        <p class="mx-auto" style="color: Black;">Thank you for playing my chess app. Close this pop-up to go back to the main screen or click the button
+        below to start a new game.</p>
+        <button type="button" class="btn btn-light">
+            <a href="{{ url_for('new_game') }}" style="color: Black;"><i class="fas fa-chess"></i> New Game</a>
+        </button>
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- white win modal -->
+<div class="modal" id="whiteModal">
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <!-- Modal Header -->
+    <div class="modal-header">
+        <h4 class="modal-title" style="color: Black;">Checkmate!</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body text-center">
+        <h1 class="display-4" style="color: Black;">White Wins!</h1>
+        <img src="/static/images/white_king.png" class="rounded" style="width: 60px; height: 60px; border: 5px solid Gold;">
+        <p class="mx-auto" style="color: Black;">Thank you for playing my chess app. Close this pop-up to go back to the main screen or click the button
+        below to start a new game.</p>
+        <button type="button" class="btn btn-light">
+            <a href="{{ url_for('new_game') }}" style="color: Black;"><i class="fas fa-chess"></i> New Game</a>
+        </button>
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- black win modal -->
+<div class="modal" id="blackModal">
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <!-- Modal Header -->
+    <div class="modal-header">
+        <h4 class="modal-title" style="color: Black;">Checkmate!</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body text-center">
+        <h1 class="display-4" style="color: Black;">Black Wins!</h1>
+        <img src="/static/images/black_king.png" class="rounded" style="width: 60px; height: 60px; border: 5px solid Gold;">
+        <p class="mx-auto" style="color: Black;">Thank you for playing my chess app. Close this pop-up to go back to the main screen or click the button
+        below to start a new game.</p>
+        <button type="button" class="btn btn-light">
+            <a href="{{ url_for('new_game') }}" style="color: Black;"><i class="fas fa-chess"></i> New Game</a>
+        </button>
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+    </div>
+
+  </div>
+</div>
+</div>

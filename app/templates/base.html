@@ -25,16 +25,17 @@
             <div class="col">
                 <h1 id="title" class="display-3 text-center">Python Chess App</h1>
                 {% include 'carousel.html' %}
-                <p id="intro" class="text-center">Chess is a fun game that I love to play. As a summer project
+                <p id="intro" class="text-center" style="padding-left:200px; padding-right:200px;">Chess is a fun game that I love to play. As a summer project
             I decided to try and build a chess app using python and decided to host it on a website
             using Flask. Currently the app only supports two player games. In the future I will try to
             create an algorithm so that you can play against the AI.
-            If you would like to see the code, please visit my github: <a class="link" href="https://github.com/BushiDokaj" target="_blank">BushiDokaj</a>
+            If you would like to see the code, please visit my github: <a href="https://github.com/BushiDokaj" target="_blank">BushiDokaj</a>
                 </p>
             </div>
         </div>
     </div>
     <div id="play_chess" class="container-fluid">
+        {% include 'game_over.html' %}
         <div class="row">
             <div class="col">
                 {% include 'promotion_white.html' %}
@@ -49,10 +50,10 @@
                 </table>
                 <p class="text-center">
                     <button type="button" class="btn btn-light">
-                        <a href="{{ url_for('new_game') }}"><i class="fas fa-chess"></i> New Game</a>
+                        <a href="{{ url_for('new_game') }}" class="light"><i class="fas fa-chess"></i> New Game</a>
                     </button>
                     <button id="flip_board" type="button" class="btn btn-light">
-                        <a href="{{ url_for('flip') }}"><i class="fas fa-retweet"></i> Flip Board</a>
+                        <a href="{{ url_for('flip') }}" class="light"><i class="fas fa-retweet"></i> Flip Board</a>
                     </button>
                 </p>
             </div>
