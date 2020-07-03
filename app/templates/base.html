@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    <title>Python Chess App</title>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="100">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#home"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#play_chess"><i class="fas fa-chess"></i> Play Chess</a> </li>
+            <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-user"></i> About Me</a></li>
+        </ul>
+    </nav>
+    <div id="home" class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h1 id="title" class="display-3 text-center">Python Chess App</h1>
+                {% include 'carousel.html' %}
+                <p id="intro" class="text-center">Chess is a fun game that I love to play. As a summer project
+            I decided to try and build a chess app using python and decided to host it on a website
+            using Flask. Currently the app only supports two player games. In the future I will try to
+            create an algorithm so that you can play against the AI.
+            If you would like to see the code, please visit my github: <a class="link" href="https://github.com/BushiDokaj" target="_blank">BushiDokaj</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="play_chess" class="container-fluid">
+        <div class="row">
+            <div class="col">
+                {% include 'promotion_white.html' %}
+                {% include 'promotion_black.html' %}
+                <h1 class="display-4 text-center">Play Chess</h1>
+                <table class="table-borderless">
+                    {% if flipped is sameas true %}
+                        {% include 'flipped_board.html' %}
+                    {% else %}
+                        {% include 'not_flipped.html' %}
+                    {% endif %}
+                </table>
+                <p class="text-center">
+                    <button type="button" class="btn btn-light">
+                        <a href="{{ url_for('new_game') }}"><i class="fas fa-chess"></i> New Game</a>
+                    </button>
+                    <button id="flip_board" type="button" class="btn btn-light">
+                        <a href="{{ url_for('flip') }}"><i class="fas fa-retweet"></i> Flip Board</a>
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="about" class="container-fluid">
+        <h1 class="display-4 text-center">About Me</h1>
+        <img id="me" src="/static/images/me.jpg" class="mx-auto d-block img-fluid">
+        <p id="end" class="text-center"> My name is Kujtim Dokaj. I am a student in the Industrial Engineering program at the
+        University of Toronto. I am looking to pursue a career at the intersection of business
+        and technology as a consultant, developer, or data scientist. If you would like to reach
+        out and contact or would like to know more about my experience feel free to connect with
+        me on <a class="link" href="https://www.linkedin.com/in/kujtim-dokaj/" target="_blank">LinkedIn</a> or
+        view my <a class="link" href="https://github.com/BushiDokaj" target="_blank">Github</a>. Thank you for
+        visiting my site.
+        </p>
+    </div>
+</body>
+</html>

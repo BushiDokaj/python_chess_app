@@ -1,0 +1,65 @@
+<tr>
+    <td>
+        <table class="table-borderless">
+            {% for y in range(8) %}
+            <tr>
+                <td class="y_nums">{{ y+1 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </td>
+    <td>
+        <table class="table-bordered">
+            {% for y in range(8) %}
+            <tr>
+                {% for x in range(8) %}
+                {% if x in [1,3,5,7] %}
+                {% if y in [0,2,4,6,8] %}
+                <td id="square({{ 8-x }},{{ y+1 }})" class="dark_square">
+                    {% if (8-x,y+1) in img_dict.keys() %}
+                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
+                    {% endif %}
+                </td>
+                {% else %}
+                <td id="square({{ 8-x }},{{ y+1 }})" class="light_square">
+                    {% if (8-x,y+1) in img_dict.keys() %}
+                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
+                    {% endif %}
+                </td>
+                {% endif %}
+                {% else %}
+                {% if y in [1,3,5,7] %}
+                <td id="square({{ 8-x }},{{ y+1 }})" class="dark_square">
+                    {% if (8-x,y+1) in img_dict.keys() %}
+                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
+                    {% endif %}
+                </td>
+                {% else %}
+                <td id="square({{ 8-x }},{{ y+1 }})" class="light_square">
+                    {% if (8-x,y+1) in img_dict.keys() %}
+                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
+                    {% endif %}
+                </td>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </td>
+</tr>
+<tr>
+    <table class="table-borderless">
+        <tr>
+            <td class="y_nums"></td>
+            <td class="x_letter">h</td>
+            <td class="x_letter">g</td>
+            <td class="x_letter">f</td>
+            <td class="x_letter">e</td>
+            <td class="x_letter">d</td>
+            <td class="x_letter">c</td>
+            <td class="x_letter">b</td>
+            <td class="x_letter">a</td>
+        </tr>
+    </table>
+</tr>

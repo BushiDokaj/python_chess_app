@@ -4,9 +4,19 @@ body {
     position: relative;
 }
 
+table {
+    margin: auto;
+}
+
+.carousel {
+    margin: auto;
+    width: 650px;
+    height: 300px;
+}
+
 .car_image {
-    width: 850px;
-    height: 400px;
+    width: 650px;
+    height: 300px;
 }
 
 #home {
@@ -44,10 +54,6 @@ body {
     padding-right:200px;
 }
 
-#play_head {
-    padding-bottom:16px;
-}
-
 #me {
     width: 200px;
     height: 260px;
@@ -69,21 +75,46 @@ body {
     background-color: WhiteSmoke;
     width: 45px;
     height: 45px;
+    text-align:center;
+    position: relative;
 }
 
 .dark_square {
     background-color: Sienna;
     width: 45px;
     height: 45px;
+    text-align:center;
+    position: relative;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+  top: 50%;
+  left: 50%;
+  position:absolute;
+  transform: translate(-50%, -50%);
+}
+
+.highlight {
+    background-color: Gold;
+    width: 45px;
+    height: 45px;
+    opacity: 0.5;
 }
 
 .piece {
-    width: 45px;
-    height 45px;
+    width: 42px;
+    height: 42px;
+    transform: translate3d
 }
 
 .x_letter {
-    width: 48px;
+    width: 46px;
     height: 20px;
     text-align: center;
 }

@@ -1,11 +1,48 @@
+from copy import deepcopy
+
+
 class Piece:
     def __init__(self, square, colour, rep):
         self.square = square
         self.rep = rep
         self.colour = colour
+        self.moves = []
 
     def __str__(self):
         return self.rep
+
+    def remove_moves_for_check(self, board):
+        p_moves = self.moves[:]
+
+        for move in p_moves:
+            b = deepcopy(board)
+            if b.board[move] is not None:
+                b.remove_piece(move)
+            b.board[move] = b.board[self.square]
+            b.board[self.square] = None
+            b.update_moves(remove=False)
+            if self.colour == 'white':
+                for p in b.black_pieces:
+                    p.update_valid_moves(b, remove=False)
+                    con = False
+                    for square in p.moves:
+                        if type(b.board[square]) == King:
+                            self.moves.remove(move)
+                            con = True
+                            break
+                    if con:
+                        break
+            else:
+                for p in b.white_pieces:
+                    p.update_valid_moves(b, remove=False)
+                    con = False
+                    for square in p.moves:
+                        if type(b.board[square]) == King:
+                            self.moves.remove(move)
+                            con = True
+                            break
+                    if con:
+                        break
 
 
 class Pawn(Piece):
@@ -14,12 +51,13 @@ class Pawn(Piece):
         self.can_en_passent = [None, None]
         self.has_moved = False
         self.value = 100
-        self.img = self.colour+"_pawn.png"
+        self.img = self.colour + "_pawn.png"
 
     def set_square(self, square):
         self.square = square
 
-    def valid_moves(self, board):
+    def update_valid_moves(self, b, remove=True):
+        board = b.board
         possible = []
         capture = []
         valid = []
@@ -31,13 +69,13 @@ class Pawn(Piece):
             capture.append((x + 1, y + 1))
             capture.append((x - 1, y + 1))
             possible.append((x, y + 1))
-            if not self.has_moved:
+            if not self.has_moved and board[(x, y+1)] is None:
                 possible.append((x, y + 2))
         elif self.colour == 'black':
             capture.append((x + 1, y - 1))
             capture.append((x - 1, y - 1))
             possible.append((x, y - 1))
-            if not self.has_moved:
+            if not self.has_moved and board[(x, y-1)] is None:
                 possible.append((x, y - 2))
         for new in possible:
             if (1 <= new[0] <= 8 and 1 <= new[1] <= 8) and board[new] is None:
@@ -45,7 +83,14 @@ class Pawn(Piece):
         for new in capture:
             if (1 <= new[0] <= 8 and 1 <= new[1] <= 8) and board[new] is not None and board[new].colour != self.colour:
                 valid.append(new)
-        return valid
+
+        if self.can_en_passent[0] is not None and self.can_en_passent[1] == (b.half_moves - 1):
+            valid.append(self.can_en_passent[0])
+
+        self.moves = valid
+
+        if remove:
+            self.remove_moves_for_check(b)
 
 
 class King(Piece):
@@ -55,8 +100,39 @@ class King(Piece):
         self.in_check = False
         self.value = 50000
         self.img = self.colour + "_king.png"
+        self.castle = {'king_side': None, 'queen_side': None}
 
-    def valid_moves(self, board):
+    def castle_perm(self, board, x, y):
+        """Determines the castleing conditions for the king. Called upon in the .move() method
+        and returns the square the king starts on, the square he will move to, the square the
+        rook starts on, and the square the rook will move to in a list."""
+        perm = True
+
+        for piece in board.values():
+            if piece is not None and piece.colour != self.colour:
+                if (x-1, y) in piece.moves or (x, y) in piece.moves:
+                    perm = False
+                    break
+
+        return perm
+
+    def castling(self, board):
+        y = self.square[1]
+
+        if board[(7, y)] is None and board[(6, y)] is None and board[(8, y)] is not None and type(board[(8, y)]) == Rook and not board[(8, y)].has_moved and not self.in_check and self.castle_perm(board, 7, y):
+            self.moves.append((7, y))
+            self.castle['king_side'] = (7, y)
+        else:
+            self.castle['king_side'] = None
+
+        if board[(3, y)] is None and board[(4, y)] is None and board[(2, y)] is None and board[(1, y)] is not None and type(board[(1, y)]) == Rook and not board[(1, y)].has_moved and not self.in_check and self.castle_perm(board, 4, y):
+            self.moves.append((3, y))
+            self.castle['queen_side'] = (3, y)
+        else:
+            self.castle['queen_side'] = None
+
+    def update_valid_moves(self, b, remove=True):
+        board = b.board
         possible = []
         valid = []
 
@@ -76,7 +152,12 @@ class King(Piece):
             if (1 <= new[0] <= 8 and 1 <= new[1] <= 8) and (board[new] is None or board[new].colour != self.colour):
                 valid.append(new)
 
-        return valid
+        self.moves = valid
+
+        if remove:
+            self.remove_moves_for_check(b)
+
+        self.castling(board)
 
 
 class Rook(Piece):
@@ -86,7 +167,8 @@ class Rook(Piece):
         self.value = 550
         self.img = self.colour + "_rook.png"
 
-    def valid_moves(self, board):
+    def update_valid_moves(self, b, remove=True):
+        board = b.board
         valid = []
 
         x = self.square[0]
@@ -136,7 +218,10 @@ class Rook(Piece):
             else:
                 valid.append(new)
 
-        return valid
+        self.moves = valid
+
+        if remove:
+            self.remove_moves_for_check(b)
 
 
 class Knight(Piece):
@@ -145,27 +230,31 @@ class Knight(Piece):
         self.value = 325
         self.img = self.colour + "_knight.png"
 
-    def valid_moves(self, board):
+    def update_valid_moves(self, b, remove=True):
+        board = b.board
         possible = []
         valid = []
 
         x = self.square[0]
         y = self.square[1]
 
-        possible.append((x+2, y-1))
-        possible.append((x+2, y+1))
-        possible.append((x-2, y-1))
-        possible.append((x-2, y+1))
-        possible.append((x+1, y+2))
-        possible.append((x-1, y+2))
-        possible.append((x+1, y-2))
-        possible.append((x-1, y-2))
+        possible.append((x + 2, y - 1))
+        possible.append((x + 2, y + 1))
+        possible.append((x - 2, y - 1))
+        possible.append((x - 2, y + 1))
+        possible.append((x + 1, y + 2))
+        possible.append((x - 1, y + 2))
+        possible.append((x + 1, y - 2))
+        possible.append((x - 1, y - 2))
 
         for new in possible:
             if (1 <= new[0] <= 8 and 1 <= new[1] <= 8) and (board[new] is None or board[new].colour != self.colour):
                 valid.append(new)
 
-        return valid
+        self.moves = valid
+
+        if remove:
+            self.remove_moves_for_check(b)
 
 
 class Bishop(Piece):
@@ -174,7 +263,8 @@ class Bishop(Piece):
         self.value = 325
         self.img = self.colour + "_bish.png"
 
-    def valid_moves(self, board):
+    def update_valid_moves(self, b, remove=True):
+        board = b.board
         valid = []
 
         x = self.square[0]
@@ -231,7 +321,10 @@ class Bishop(Piece):
             else:
                 valid.append(new)
 
-        return valid
+        self.moves = valid
+
+        if remove:
+            self.remove_moves_for_check(b)
 
 
 class Queen(Piece):
@@ -240,7 +333,8 @@ class Queen(Piece):
         self.value = 1000
         self.img = self.colour + "_queen.png"
 
-    def valid_moves(self, board):
+    def update_valid_moves(self, b, remove=True):
+        board = b.board
         valid = []
 
         x = self.square[0]
@@ -345,4 +439,7 @@ class Queen(Piece):
             else:
                 valid.append(new)
 
-        return valid
+        self.moves = valid
+
+        if remove:
+            self.remove_moves_for_check(b)
