@@ -38,7 +38,6 @@ class Board:
         self.half_moves = 0
         self.fifty_moves = 0
         self.white_to_move = True
-        self.flipped = False
         self.outcome = None
 
         for file in range(1, 9):
