@@ -35,6 +35,7 @@ class Board:
         return str_board
 
     def reset(self):
+        print('triggered reset')
         self.half_moves = 0
         self.fifty_moves = 0
         self.white_to_move = True
@@ -245,7 +246,7 @@ class Board:
             else:
                 raise Exception("That piece cannot move there")
         else:
-            raise Exception("Error: Wrong colour piece selected for move.")
+            raise Exception("Error: Wrong colour piece selected for move." + str(self.white_to_move) + piece.colour)
 
         # add the stat to the list of prev states and update the moves for each piece
         self.add_state()
