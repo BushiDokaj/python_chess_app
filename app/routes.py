@@ -4,7 +4,6 @@ from logic.chess_board import Board
 from logic.chess_pieces import *
 
 b = Board()
-b.reset()
 
 @app.route('/', methods=["GET", "POST"])
 @app.route('/chess', methods=["GET", "POST"])
