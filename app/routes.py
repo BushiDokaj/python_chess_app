@@ -40,7 +40,7 @@ def load_moves():
         if (b.white_to_move and piece.colour == 'white') or (not b.white_to_move and piece.colour == 'black'):
             moves = b.board[eval(sq)].moves
         else:
-            raise Exception('Wrong colour piece selected for move' + b.white_to_move + piece.colour)
+            raise Exception('Wrong colour piece selected for move' + str(b.white_to_move) + piece.colour)
 
     return make_response(jsonify(moves))
 
