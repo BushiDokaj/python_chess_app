@@ -8,6 +8,7 @@ b = Board()
 @app.route('/', methods=["GET", "POST"])
 @app.route('/chess', methods=["GET", "POST"])
 def chess():
+    print(b)
     flipped = b.flipped
 
     img_dict = b.board_html()
@@ -24,6 +25,7 @@ def flip():
 @app.route('/new_game', methods=["GET", "POST"])
 def new_game():
     b.reset()
+    print(b)
     return redirect(url_for('chess'))
 
 
@@ -32,11 +34,13 @@ def load_moves():
     moves = []
     if request.method == 'POST':
         sq = request.get_json()['sq_one']
+        print(sq)
         piece = b.board[eval(sq)]
+        print(b)
         if (b.white_to_move and piece.colour == 'white') or (not b.white_to_move and piece.colour == 'black'):
             moves = b.board[eval(sq)].moves
         else:
-            raise Exception('Wrong colour piece selected for move')
+            raise Exception('Wrong colour piece selected for move' + b.white_to_move + piece.colour)
 
     return make_response(jsonify(moves))
 
@@ -68,6 +72,8 @@ def execute():
 
         sq_one = eval(request.get_json()['sq_one'])
         sq_two = eval(request.get_json()['sq_two'])
+        print(sq_one)
+        print(sq_two)
         piece = b.board[sq_one]
 
         if type(piece) == King and (piece.castle['king_side'] == sq_two or piece.castle['queen_side'] == sq_two):
@@ -89,5 +95,7 @@ def execute():
         except Exception as e:
             error = str(e)
         response = {'error': error, 'castle': castle, 'empty': empty, 'outcome': outcome}
+
+        print(b)
 
     return make_response(jsonify(response))

@@ -114,7 +114,6 @@ class Board:
         handles en-passent captures, castling, and promotions."""
 
         piece = self.board[sq_one]
-        print(piece)
 
         # en-passent capture
         if type(piece) == Pawn and sq_two == piece.can_en_passent[0] and self.half_moves - 1 == piece.can_en_passent[1]:
