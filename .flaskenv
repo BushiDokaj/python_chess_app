@@ -1,2 +1,1 @@
 FLASK_APP=chess_app.py
-FLASK_ENV=development
