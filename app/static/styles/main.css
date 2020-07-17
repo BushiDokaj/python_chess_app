@@ -10,23 +10,24 @@ table {
 
 .carousel {
     margin: auto;
-    width: 650px;
+    width: 620px;
     height: 300px;
 }
 
 .car_image {
-    width: 650px;
+    width: 620px;
     height: 300px;
 }
 
 #home {
-    padding-top: 70px;
+    margin-top: 70px;
     padding-bottom: 30px;
     padding-right:16px;
     padding-left:16px;
 }
 
 #play_chess {
+    margin: auto;
     padding-top: 30px;
     padding-bottom: 30px;
     padding-right:16px;
@@ -50,15 +51,11 @@ table {
 
 #end {
     padding-top:16px;
-    padding-left:200px;
-    padding-right:200px;
 }
 
 #me {
-    width: 200px;
-    height: 260px;
-    padding-top: 16px;
-    padding-bottom: 16px;
+    width: 100%;
+    transform: rotate();
 }
 
 a:link, a:visited, a:hover, a:active {
@@ -73,29 +70,29 @@ a.light {
 
 .y_nums {
     width: 20px;
-    height: 45px;
+    height: 42px;
     text-align: center;
 }
 
 .light_square {
     background-color: WhiteSmoke;
-    width: 45px;
-    height: 45px;
+    width: 42px;
+    height: 42px;
     text-align:center;
     position: relative;
 }
 
 .dark_square {
-    background-color: Sienna;
-    width: 45px;
-    height: 45px;
+    background-color: #966136;
+    width: 42px;
+    height: 42px;
     text-align:center;
     position: relative;
 }
 
 .dot {
-  height: 20px;
-  width: 20px;
+  height: 17px;
+  width: 17px;
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
@@ -108,19 +105,18 @@ a.light {
 
 .highlight {
     background-color: Gold;
-    width: 45px;
-    height: 45px;
+    width: 42px;
+    height: 42px;
     opacity: 0.5;
 }
 
 .piece {
-    width: 42px;
-    height: 42px;
-    transform: translate3d
+    width: 40px;
+    height: 40px;
 }
 
 .x_letter {
-    width: 46px;
+    width: 42.5px;
     height: 20px;
     text-align: center;
 }

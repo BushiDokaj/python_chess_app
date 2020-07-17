@@ -13,34 +13,46 @@
     <title>Python Chess App</title>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="100">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-        <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="#home"><i class="fas fa-home"></i> Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#play_chess"><i class="fas fa-chess"></i> Play Chess</a> </li>
-            <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-user"></i> About Me</a></li>
-        </ul>
+    {% include 'game_over.html' %}
+    {% include 'promotion_white.html' %}
+    {% include 'promotion_black.html' %}
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#home"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#play_chess"><i class="fas fa-chess"></i> Play Chess</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-user"></i> About Me</a></li>
+            </ul>
+        </div>
     </nav>
     <div id="home" class="container-fluid">
         <div class="row">
-            <div class="col">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
                 <h1 id="title" class="display-3 text-center">Python Chess App</h1>
                 {% include 'carousel.html' %}
-                <p id="intro" class="text-center" style="padding-left:200px; padding-right:200px;">Chess is a fun game that I love to play. As a summer project
-            I decided to try and build a chess app using python and decided to host it on a website
-            using Flask. Currently the app only supports two player games. In the future I will try to
-            create an algorithm so that you can play against the AI.
-            If you would like to see the code, please visit my github: <a href="https://github.com/BushiDokaj" target="_blank">BushiDokaj</a>
+                <p id="intro" class="text-center">
+                    Chess is one of the oldest and most complex games ever created. Chess is a game of strategy,
+                    tactics and calculation. As a child playing against my brother or my dad, it was a great exercise
+                    in problem solving. As a programmer it presents a great opportunity to develop my skill and experience.
+                    So, this summer, I built a chess app using Python and decided to host it on a website
+                    using Flask. Currently the app only supports two player games. In the future I will try to
+                    create an algorithm so that you can play against the computer. If you would like to see the code,
+                    please visit my github: <a href="https://github.com/BushiDokaj" target="_blank">BushiDokaj</a>
                 </p>
             </div>
+            <div class="col-2"></div>
         </div>
     </div>
     <div id="play_chess" class="container-fluid">
-        {% include 'game_over.html' %}
+        <h1 class="display-4 text-center">Play Chess</h1>
+        <br>
         <div class="row">
-            <div class="col">
-                {% include 'promotion_white.html' %}
-                {% include 'promotion_black.html' %}
-                <h1 class="display-4 text-center">Play Chess</h1>
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
                 <table class="table-borderless">
                     {% if flipped is sameas true %}
                         {% include 'flipped_board.html' %}
@@ -49,27 +61,53 @@
                     {% endif %}
                 </table>
                 <p class="text-center">
-                    <button type="button" class="btn btn-light">
-                        <a href="{{ url_for('new_game') }}" class="light"><i class="fas fa-chess"></i> New Game</a>
-                    </button>
-                    <button id="flip_board" type="button" class="btn btn-light">
-                        <a href="{{ url_for('flip') }}" class="light"><i class="fas fa-retweet"></i> Flip Board</a>
-                    </button>
+                    <a href="{{ url_for('new_game') }}" class="light btn btn-light"><i class="fas fa-chess"></i> New Game</a>
+                    <a href="{{ url_for('flip') }}" class="light btn btn-light"><i class="fas fa-retweet"></i> Flip Board</a>
                 </p>
             </div>
+            <div class="col-md-4">
+                <br>
+                <br>
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0 small">Attackers may sometimes regret bad moves, but it is much worse to forever regret an opportunity you allowed to pass you by</p>
+                    <footer class="blockquote-footer"><cite title="Source Title">Gary Kasparov</cite></footer>
+                </blockquote>
+                <br>
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0 small">You may learn much more from a game you lose than from a game you win. You will have to lose hundreds of games before becoming a good player</p>
+                    <footer class="blockquote-footer"><cite title="Source Title">Jose Raul Capablanca</cite></footer>
+                </blockquote>
+            </div>
+            <div class="col-lg-1"></div>
         </div>
     </div>
     <div id="about" class="container-fluid">
         <h1 class="display-4 text-center">About Me</h1>
-        <img id="me" src="/static/images/me.jpg" class="mx-auto d-block img-fluid">
-        <p id="end" class="text-center"> My name is Kujtim Dokaj. I am a student in the Industrial Engineering program at the
-        University of Toronto. I am looking to pursue a career at the intersection of business
-        and technology as a consultant, developer, or data scientist. If you would like to reach
-        out and contact or would like to know more about my experience feel free to connect with
-        me on <a class="link" href="https://www.linkedin.com/in/kujtim-dokaj/" target="_blank">LinkedIn</a> or
-        view my <a class="link" href="https://github.com/BushiDokaj" target="_blank">Github</a>. Thank you for
-        visiting my site.
-        </p>
+        <br>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4">
+                <div class="card bg-light" style="width: 300px; margin: auto;">
+                    <img id="me" src="/static/images/me.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p id="end" class="card-text" style="color: Black;"> My name is Kujtim Dokaj. I am a student in the Industrial Engineering program at the
+                        University of Toronto. I am looking to pursue a career at the intersection of business
+                        and technology as a consultant, developer, or data scientist. Thank you for visiting my site.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <p>If you would like to contact me or learn more about my experiences you can do so through the following:</p>
+                <br>
+                <p><i class="fab fa-linkedin-in fa-lg"></i> <a class="link" href="https://www.linkedin.com/in/kujtim-dokaj/" target="_blank">Kujtim Dokaj</a></p>
+                <br>
+                <p><i class="fab fa-github-square fa-lg"></i> <a class="link" href="https://github.com/BushiDokaj" target="_blank">BushiDokaj</a></p>
+                <br>
+                <p><i class="fas fa-envelope fa-lg"></i> kujtim.dokaj@mail.utoronto.ca</p>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
     </div>
 </body>
 </html>

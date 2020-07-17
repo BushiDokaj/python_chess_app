@@ -17,13 +17,13 @@
                 {% if y in [0,2,4,6,8] %}
                 <td id="square({{ 8-x }},{{ y+1 }})" class="dark_square">
                     {% if (8-x,y+1) in img_dict.keys() %}
-                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
+                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" data-type="{{ img_dict[(8-x,y+1)].split('_')[0] }}" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
                     {% endif %}
                 </td>
                 {% else %}
                 <td id="square({{ 8-x }},{{ y+1 }})" class="light_square">
                     {% if (8-x,y+1) in img_dict.keys() %}
-                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
+                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" data-type="{{ img_dict[(8-x,y+1)].split('_')[0] }}" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
                     {% endif %}
                 </td>
                 {% endif %}
@@ -31,13 +31,13 @@
                 {% if y in [1,3,5,7] %}
                 <td id="square({{ 8-x }},{{ y+1 }})" class="dark_square">
                     {% if (8-x,y+1) in img_dict.keys() %}
-                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
+                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" data-type="{{ img_dict[(8-x,y+1)].split('_')[0] }}" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
                     {% endif %}
                 </td>
                 {% else %}
                 <td id="square({{ 8-x }},{{ y+1 }})" class="light_square">
                     {% if (8-x,y+1) in img_dict.keys() %}
-                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
+                    <img id="piece({{ 8-x }},{{ y+1 }})" class="piece" data-type="{{ img_dict[(8-x,y+1)].split('_')[0] }}" src="/static/images/{{ img_dict[(8-x,y+1)] }}">
                     {% endif %}
                 </td>
                 {% endif %}

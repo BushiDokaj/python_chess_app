@@ -103,9 +103,6 @@ class King(Piece):
         self.castle = {'king_side': None, 'queen_side': None}
 
     def castle_perm(self, board, x, y):
-        """Determines the castleing conditions for the king. Called upon in the .move() method
-        and returns the square the king starts on, the square he will move to, the square the
-        rook starts on, and the square the rook will move to in a list."""
         perm = True
 
         for piece in board.values():
