@@ -11,4 +11,6 @@ The chess app works by using jquery to send ajax requests to the server when the
 does the move. I've defined classes for pieces and created functions that determine how they move and what squares are available to them at any time. I'm also using a board
 class to track the state of the board and execute moves. In the future I will try to create an ai that can play against the user, but that is a challenge for another day.
 
+You can check out the site at http://pythonchessapp.herokuapp.com/
+
 Thanks for checking out my project!
