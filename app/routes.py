@@ -126,7 +126,7 @@ def generate_id():
 
 def load_board():
 
-    if 'game_id' in session:
+    if 'game_id' in session and c.get(session['game_id']) is not None:
         pb = c.get(session['game_id'])
         board = pickle.loads(pb)
     else:
